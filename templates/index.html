@@ -15,6 +15,19 @@
       var outputLabel = document.getElementById("outputLabel");
       var inputValue = inputBox.value;
       
+      // Check if input is a valid link
+      if (!checkLinkValidity(inputValue)) {
+        // write to console that link is invalid
+        console.log('Link is invalid!');
+        //outputLabel.innerText = "Invalid link!";
+        //inputBox.value = "";
+        
+      }else{
+        // write to console that link is invalid
+        console.log('Link is valid!');
+        //outputLabel.innerText = "Invalid link!";
+        //inputBox.value = "";
+      }
       // Make a call to your Flask backend
       fetch('/process', {
         method: 'POST',
@@ -32,6 +45,21 @@
       });
 
       inputBox.value = "";
+    }
+
+    async function checkLinkValidity(link) {
+      try {
+        const response = await fetch(link);
+        if (response.ok) {
+          console.log('Link is valid!');
+          return true;
+        } else {
+          console.log('Link is invalid!');
+          return false;
+        }
+      } catch (error) {
+        console.error('Error occurred while checking link validity:', error);
+      }
     }
   </script>
 </body>
