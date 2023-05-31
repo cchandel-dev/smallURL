@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>URL Shortener</title>
-</head>
-<body>
-  <h1>thank you for using our URL shortener!</h1>
-  <input type="text" id="inputBox" placeholder="Enter text">
-  <button onclick="handleEnterClick()">Enter</button>
-  <label id="outputLabel"></label>
+    <head>
+        <title>URL Shortener</title>
+    </head>
+    <body>
+        <h1>thank you for using our URL shortener!</h1>
+        <input type="text" id="inputBox" placeholder="Enter text">
+        <button onclick="handleEnterClick()">Enter</button>
+        <label id="outputLabel"></label>
+        <script>
+            var state = {
+                'msg': 'Hello',
+                'name': 'Chandan'
+            };
+            function handleEnterClick() {
+                var inputBox = document.getElementById("inputBox");
+                var outputLabel = document.getElementById("outputLabel");
+                var inputValue = inputBox.value;
+    
+                if (state.hasOwnProperty(inputValue)) {
+                    outputLabel.innerText = state[inputValue];
+                }
+                else {
 
-  <script>
-    function handleEnterClick() {
-      var inputBox = document.getElementById("inputBox");
-      var outputLabel = document.getElementById("outputLabel");
-      var inputValue = inputBox.value;
-      
-      // Make a call to your Flask backend
-      fetch('/process', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ input: inputValue })
-      })
-      .then(response => response.json())
-      .then(data => {
-        outputLabel.innerText = data.output;
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+                    // Make a call to your Flask backend
+                    fetch('/process', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            input: inputValue
+                        })
+                    }).then(response=>response.json()).then(data=>{
+                        outputLabel.innerText = data.output;
+                    }
+                    ).catch(error=>{
+                        console.error('Error:', error);
+                    }
+                    );
 
-      inputBox.value = "";
-    }
-  </script>
-</body>
+                    inputBox.value = "";
+                }
+            }
+        </script>
+    </body>
 </html>

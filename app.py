@@ -1,12 +1,12 @@
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
 
 #MongoDB user permissions chaged to modify all databases
 uri = "mongodb+srv://Brain3DVizMember:9GyKqp4b9blclzqJ@tinyurl-experimental.cuym0r0.mongodb.net/?retryWrites=true&w=majority"
-
+counter = 0
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
 # Send a ping to confirm a successful connection
@@ -30,6 +30,7 @@ def index():
 def process():
     data = request.get_json()
     input_value = data.get('input')
+   
 
     # Process the input value as needed
     # Perform any necessary calculations or operations
