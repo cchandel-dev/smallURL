@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Text Input Example</title>
+  <title>URL Shortener</title>
 </head>
 <body>
-  <h1>Text Input Example</h1>
+  <h1>thank you for using our URL shortener!</h1>
   <input type="text" id="inputBox" placeholder="Enter text">
   <button onclick="handleEnterClick()">Enter</button>
   <label id="outputLabel"></label>
@@ -13,9 +13,23 @@
     function handleEnterClick() {
       var inputBox = document.getElementById("inputBox");
       var outputLabel = document.getElementById("outputLabel");
-
       var inputValue = inputBox.value;
-      outputLabel.innerText = inputValue;
+      
+      // Make a call to your Flask backend
+      fetch('/process', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ input: inputValue })
+      })
+      .then(response => response.json())
+      .then(data => {
+        outputLabel.innerText = data.output;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
 
       inputBox.value = "";
     }

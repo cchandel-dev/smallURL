@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
@@ -25,6 +25,20 @@ def index():
     # Store data in MongoDB
     cl.insert_one({'name': 'John', 'age': 25})
     return render_template('index.html')
+
+@app.route('/process', methods=['POST'])
+def process():
+    data = request.get_json()
+    input_value = data.get('input')
+
+    # Process the input value as needed
+    # Perform any necessary calculations or operations
+
+    # Create a response JSON with the output
+    output_value = "Processed: " + input_value
+    response = {'output': output_value}
+
+    return jsonify(response)
 
 if __name__ == '__main__':
     app.run(debug = True)
