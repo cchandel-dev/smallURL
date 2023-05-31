@@ -3,7 +3,7 @@
     <head>
         <title>URL Shortener</title>
     </head>
-    <body>
+    <body onload="onLoad()">
         <h1>thank you for using our URL shortener!</h1>
         <input type="text" id="inputBox" placeholder="Enter text">
         <button onclick="handleEnterClick()">Enter</button>
@@ -13,15 +13,25 @@
                 'msg': 'Hello',
                 'name': 'Chandan'
             };
+            var data = {
+                "browser": "",
+                "ip": "",
+                "location": "",
+                "OS": "",
+                "device": "",
+                "startTime": "",
+                "endTime": ""
+            };
             function handleEnterClick() {
                 var inputBox = document.getElementById("inputBox");
                 var outputLabel = document.getElementById("outputLabel");
                 var inputValue = inputBox.value;
-    
+
+                // Check if input is a valid link
+
                 if (state.hasOwnProperty(inputValue)) {
                     outputLabel.innerText = state[inputValue];
-                }
-                else {
+                } else {
 
                     // Make a call to your Flask backend
                     fetch('/process', {
@@ -41,6 +51,89 @@
                     );
 
                     inputBox.value = "";
+                }
+            }
+
+            function onLoad() {
+
+                //get users browser, ip, location, OS, and device and store in JSON
+                // get users browser
+                fetch('https://api.ipify.org?format=json').then(response=>response.json()).then(data=>{
+                    updateData('ip', data.ip);
+                }
+                ).catch(error=>{
+                    console.error('Error:', error);
+                }
+                );
+
+                //get users location
+                fetch('https://ipapi.co/json/').then(response=>response.json()).then(data=>{
+                    updateData('location', data.city);
+                }
+                ).catch(error=>{
+                    console.error('Error:', error);
+                }
+                );
+
+                //get users OS
+                updateData('OS', navigator.platform);
+
+                //get users device
+                updateData('device', navigator.userAgent);
+
+                //get start time
+                updateData('startTime', new Date());
+
+                console.log(data);
+
+                /*
+      //get users browser
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.ip);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+
+      //get users location
+      fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+
+      //get users OS
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.ip);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+
+      //get users device
+      fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.ip);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });*/
+
+                var startTime = new Date();
+
+            }
+
+            function updateData(field, value) {
+                if (data.hasOwnProperty(field)) {
+                    data[field] = value;
                 }
             }
         </script>

@@ -1,5 +1,6 @@
 
 from flask import Flask, render_template, request, jsonify, session
+import requests
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
@@ -29,17 +30,41 @@ def index():
 @app.route('/process', methods=['POST'])
 def process():
     data = request.get_json()
-    input_value = data.get('input')
-   
+    link = data.get('input')
+    if link:
+        try:
+            response = requests.head(link)
+            if response.status_code == requests.codes.ok:
+                response = 'Link is valid'
+            else:
+                response = 'Link is not valid'
+        except requests.exceptions.RequestException:
+            response = 'Link is not valid'
+    else:
+        response = 'No link provided'
 
     # Process the input value as needed
     # Perform any necessary calculations or operations
 
     # Create a response JSON with the output
-    output_value = "Processed: " + input_value
-    response = {'output': output_value}
+    response = {'output': response}
 
     return jsonify(response)
+
+@app.route('/check-link', methods=['POST'])
+def check_link():
+    link = request.form.get('link')
+    if link:
+        try:
+            response = request.head(link)
+            if response.status_code == request.codes.ok:
+                return 'Link is valid'
+            else:
+                return 'Link is not valid'
+        except request.exceptions.RequestException:
+            return 'Link is not valid'
+    else:
+        return 'No link provided'
 
 if __name__ == '__main__':
     app.run(debug = True)
