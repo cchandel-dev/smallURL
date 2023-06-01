@@ -7,19 +7,6 @@ Why choose Flask as your framework?
 
 The serious candidates for the backend were Node.js, Django & Flask. The dev team is considering an extension of this project that may require heavy data analysis work, Node.js is not Pythonic and does not have the same level of built-in support for machine learning and data analysis that the dev team is comfortable with. Between Flask & Django typically Flask is used to develop a rapid prototype due to its simple configuration/limited built-in features, whereas Django offers features like authentication, admin interface, ORM, and form handling out of the box. We built our prototype in Flask for convenience and once we had a working minimum viable product we migrated to Django.
 
-Why did you implement link checking on the server instead of the client?
+What client-side storage options did you consider?
 
-
-CORS (Cross-Origin Resource Sharing) issue. CORS is a security mechanism implemented by web browsers to enforce restrictions on cross-origin requests.
-
-The error message specifically states that the request made from 'http://127.0.0.1:5000' to 'https://www.google.com/' was blocked due to the absence of the 'Access-Control-Allow-Origin' header in the response from Google's server. This means that Google's server does not explicitly allow requests from your domain.
-
-To resolve this issue, you have a few options:
-
-Proxy the request: Instead of making the request directly from your frontend code, you can make the request to your own backend server, and then have your server forward the request to Google's server. This way, the request is treated as a same-origin request, and you won't encounter CORS restrictions.
-
-Use a CORS proxy: You can use a CORS proxy server that acts as an intermediary between your frontend and the external server. The proxy server will add the necessary headers to the response, allowing the browser to make the cross-origin request. One popular CORS proxy is crossorigin.me.
-
-Check for alternatives: If you are trying to fetch data from an external server, see if they provide an API specifically designed for cross-origin requests, such as a JSONP endpoint or an API with CORS support.
-
-JSONP: If the external server supports JSONP (JSON with Padding), you can use JSONP requests instead of regular AJAX requests. JSONP allows cross-origin requests by dynamically injecting a script tag into the HTML page.
+https://www.sitepoint.com/client-side-storage-options-comparison/

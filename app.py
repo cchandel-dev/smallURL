@@ -35,7 +35,7 @@ def process():
         try:
             response = requests.head(link)
             if response.status_code == requests.codes.ok:
-                response = 'Link is valid'
+                response = 'Link is valid' #encode called from here
             else:
                 response = 'Link is not valid'
         except requests.exceptions.RequestException:
@@ -50,21 +50,6 @@ def process():
     response = {'output': response}
 
     return jsonify(response)
-
-@app.route('/check-link', methods=['POST'])
-def check_link():
-    link = request.form.get('link')
-    if link:
-        try:
-            response = request.head(link)
-            if response.status_code == request.codes.ok:
-                return 'Link is valid'
-            else:
-                return 'Link is not valid'
-        except request.exceptions.RequestException:
-            return 'Link is not valid'
-    else:
-        return 'No link provided'
 
 if __name__ == '__main__':
     app.run(debug = True)

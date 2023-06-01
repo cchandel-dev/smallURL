@@ -22,6 +22,7 @@
                 "startTime": "",
                 "endTime": ""
             };
+
             function handleEnterClick() {
                 var inputBox = document.getElementById("inputBox");
                 var outputLabel = document.getElementById("outputLabel");
@@ -73,7 +74,7 @@
                 ).catch(error=>{
                     console.error('Error:', error);
                 }
-                );
+                )
 
                 //get users OS
                 updateData('OS', navigator.platform);
@@ -85,51 +86,7 @@
                 updateData('startTime', new Date());
 
                 console.log(data);
-
-                /*
-      //get users browser
-      fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-          console.log(data.ip);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-
-      //get users location
-      fetch('https://ipapi.co/json/')
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-
-      //get users OS
-      fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-          console.log(data.ip);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-
-      //get users device
-      fetch('https://api.ipify.org?format=json')
-        .then(response => response.json())
-        .then(data => {
-          console.log(data.ip);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });*/
-
-                var startTime = new Date();
-
-            }
+            };
 
             function updateData(field, value) {
                 if (data.hasOwnProperty(field)) {
