@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, redirect
 import requests
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi        
@@ -26,8 +26,9 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     # Store data in MongoDB
-    cl.insert_one({'long_link': 'John', 'short_link': ''})
+    cl.insert_one({'long_link': 'John', 'short_link': 'Smith'})
     return render_template('index.html')
+
 
 @app.route('/process', methods=['POST'])
 def process():
@@ -54,6 +55,16 @@ def process():
     return jsonify(response)
 
 
+# Define a route for short URLs
+@app.route('/<short_url>')
+def redirect_to_original_url(short_url):
+    # Query the collection to check if the string exists
+    result = cl.find_one({"short_link": short_url})
+    if result is not None:
+        return redirect(result["long_link"])
+    else:
+        return 'Link is not valid'
+
 def encode(link):
     # String to search for
 
@@ -67,7 +78,6 @@ def encode(link):
         short_link = generate_unique_string(link)
         cl.insert_one({'long_link': link, 'short_link': short_link})
         return 'from encoder: ' + short_link
-
 
 
 def generate_unique_string(input_string):
