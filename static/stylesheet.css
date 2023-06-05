@@ -38,9 +38,9 @@ ul {
 }
 
 .container {
-    width: 200px;
+    width: 300px;
     border: 2px solid black;
-    padding: 20px;
+    padding: 5px;
     margin-left: 0px;
     margin-top: -150px;
 }
