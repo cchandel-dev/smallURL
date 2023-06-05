@@ -5,7 +5,7 @@ MongoDB, ________ & _________ - MongoDB provides the easiest DB server scaling (
 
 Why choose Flask as your framework?
 
-The serious candidates for the backend were Node.js, Django & Flask. The dev team is considering an extension of this project that may require heavy data analysis work, Node.js is not Pythonic and does not have the same level of built-in support for machine learning and data analysis that the dev team is comfortable with. Between Flask & Django typically Flask is used to develop a rapid prototype due to its simple configuration/limited built-in features, whereas Django offers features like authentication, admin interface, ORM, and form handling out of the box. We built our prototype in Flask for convenience and once we had a working minimum viable product we migrated to Django.
+The serious candidates for the backend were Node.js, Django & Flask. The dev team was originally considering an extension of this project that may require heavy data analysis work, Node.js is not Pythonic and does not have the same level of built-in support for machine learning and data analysis that the dev team is comfortable with. Between Flask & Django typically Flask is used to develop a rapid prototype due to its simple configuration/limited built-in features, whereas Django offers features like authentication, admin interface, ORM, and form handling out of the box. We built our prototype in Flask for convenience and once we had a working minimum viable product we have the option to migrate to Django, if we would like to build-out the more involved features.
 
 What client-side storage options did you consider?
 
