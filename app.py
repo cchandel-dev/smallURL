@@ -73,12 +73,12 @@ def encode(link):
     result = cl.find_one({"long_link": link})
 
     if result is not None:
-        short_link = 'from db: ' + result["short_link"]
+        short_link = 'https://url-shortening.herokuapp.com/' + result["short_link"]
         return short_link
     else:
         short_link = generate_unique_string(link)
         cl.insert_one({'long_link': link, 'short_link': short_link})
-        return 'from encoder: ' + short_link
+        return 'https://url-shortening.herokuapp.com/' + short_link
 
 
 def generate_unique_string(input_string):
