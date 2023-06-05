@@ -10,115 +10,135 @@
             <nav>
                 <ul id="nav_bar">
                     <li class="nav-links" id="gmail">
-                        <a href="#">About this project (coming soon)</a>
-                    </li>
-                    <li class="nav-links">
-                        <a href="#">Analytics (coming soon)</a>
+                        <p>Contributors:</p>
+                        <li class="nav-links"><a href="https://www.linkedin.com/in/chandan-chandel/">Chandan</a></li>
+                        <li class="nav-links"><a href="https://www.linkedin.com/in/connorburgess1/">Connor</a></li>
+                        <li class="nav-links"><a href="https://www.linkedin.com/in/matthew-peck-7019161a2/">Matthew</a></li>
                     </li>
                 </ul>
             </nav>
             <h1>URL Shortening (use a picture of logo here)</h1>
-</h1></header>
-<!-- FORM SEARCH -->
-<div class="form">
-    <form>
-        <label for="form-search"></label>
-        <br>
-        <input class="input_style" type="text" id="inputBox" placeholder="Enter long link here"></input>
-    </form>
-</div>
-<!-- BUTTONS -->
-<div class="buttons">
-    <button class="button_style" type="submit" onclick="handleEnterClick()">Shorten the Link</button>
-</div>
-<!-- LABEL-->
-<div class="container">
-    <label id="outputLabel" class="text"></label>
-</div>
-<!--DATA HANDLING -->
-<script>
-    var state = {
-        'msg': 'Hello',
-        'name': 'Chandan'
-    };
-    var data = {
-        "browser": "",
-        "ip": "",
-        "location": "",
-        "OS": "",
-        "device": "",
-        "startTime": "",
-        "endTime": ""
-    };
+        </header>
+        <!-- FORM SEARCH -->
+        <div class="form">
+            <form>
+                <label for="form-search"></label>
+                <br>
+                <input class="input_style" type="text" id="inputBox" placeholder="Enter long link here"></input>
+            </form>
+        </div>
+        <!-- BUTTONS -->
+        <div class="buttons">
+            <button class="button_style" type="submit" onclick="handleEnterClick()">Shorten the Link</button>
+        </div>
+        <!-- LABEL-->
+        <div class="container">
+            <label id="outputLabel" class="text"></label>
+        </div>
+        <!--DATA HANDLING -->
+        <script>
+            var state = {
+                'msg': 'Hello',
+                'name': 'Chandan'
+            };
+            var data = {
+                "browser": "",
+                "ip": "",
+                "location": "",
+                "OS": "",
+                "device": "",
+                "startTime": "",
+                "endTime": ""
+            };
 
-    function handleEnterClick() {
-        var inputBox = document.getElementById("inputBox");
-        var outputLabel = document.getElementById("outputLabel");
-        var inputValue = inputBox.value;
+            function handleEnterClick() {
+                var inputBox = document.getElementById("inputBox");
+                var outputLabel = document.getElementById("outputLabel");
+                var inputValue = inputBox.value;
 
-        // Check if input is a valid link
+                // Check if input is a valid link
 
-        if (state.hasOwnProperty(inputValue)) {
-            outputLabel.innerText = state[inputValue];
-        } else {
+                if (state.hasOwnProperty(inputValue)) {
+                    outputLabel.innerText = state[inputValue];
+                } else {
 
-            // Make a call to your Flask backend
-            fetch('/process', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    input: inputValue
-                })
-            }).then(response=>response.json()).then(data=>{
-                outputLabel.innerText = data.output;
+                    // Make a call to your Flask backend
+                    fetch('/process', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            input: inputValue
+                        })
+                    }).then(response=>response.json()).then(data=>{
+                        outputLabel.innerText = data.output;
+                    }
+                    ).catch(error=>{
+                        console.error('Error:', error);
+                    }
+                    );
+
+                    inputBox.value = "";
+                }
             }
-            ).catch(error=>{
-                console.error('Error:', error);
+
+            function onLoad() {
+
+                //get users browser, ip, location, OS, and device and store in JSON
+                // get users browser
+                fetch('https://api.ipify.org?format=json').then(response=>response.json()).then(data=>{
+                    updateData('ip', data.ip);
+                }
+                ).catch(error=>{
+                    console.error('Error:', error);
+                }
+                );
+
+                //get users location
+                fetch('https://ipapi.co/json/').then(response=>response.json()).then(data=>{
+                    updateData('location', data.city);
+                }
+                ).catch(error=>{
+                    console.error('Error:', error);
+                }
+                )
+
+                //get users OS
+                updateData('OS', navigator.platform);
+
+                //get users device
+                updateData('device', navigator.userAgent);
+
+                //get start time
+                updateData('startTime', new Date());
+
+                console.log(data);
             }
-            );
+            ;function updateData(field, value) {
+                if (data.hasOwnProperty(field)) {
+                    data[field] = value;
+                }
+            }
+            /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
 
-            inputBox.value = "";
-        }
-    }
-
-    function onLoad() {
-
-        //get users browser, ip, location, OS, and device and store in JSON
-        // get users browser
-        fetch('https://api.ipify.org?format=json').then(response=>response.json()).then(data=>{
-            updateData('ip', data.ip);
-        }
-        ).catch(error=>{
-            console.error('Error:', error);
-        }
-        );
-
-        //get users location
-        fetch('https://ipapi.co/json/').then(response=>response.json()).then(data=>{
-            updateData('location', data.city);
-        }
-        ).catch(error=>{
-            console.error('Error:', error);
-        }
-        )
-
-        //get users OS
-        updateData('OS', navigator.platform);
-
-        //get users device
-        updateData('device', navigator.userAgent);
-
-        //get start time
-        updateData('startTime', new Date());
-
-        console.log(data);
-    }
-    ;function updateData(field, value) {
-        if (data.hasOwnProperty(field)) {
-            data[field] = value;
-        }
-    }
-</script>
-</body></html>
+            // Close the dropdown menu if the user clicks outside of it
+            window.onclick = function(event) {
+                if (!event.target.matches('.dropbtn')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    var i;
+                    for (i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
