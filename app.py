@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request, jsonify, redirect
 import requests
 from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi        
+from pymongo.server_api import ServerApi
 import hashlib
 import base64
 
@@ -15,9 +15,10 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 # Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
+    # print("Pinged your deployment. You successfully connected to MongoDB!")
 except Exception as e:
-    print(e)
+    pass
+    # print(e)
 db = client['tinyURL-experimental'] #Select the database
 cl = db['test'] #Select the collection name
 
