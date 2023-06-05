@@ -2,97 +2,123 @@
 <html>
     <head>
         <title>URL Shortener</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheet.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     </head>
     <body onload="onLoad()">
-        <h1>thank you for using our URL shortener!</h1>
-        <input type="text" id="inputBox" placeholder="Enter text">
-        <button onclick="handleEnterClick()">Enter</button>
-        <label id="outputLabel"></label>
-        <script>
-            var state = {
-                'msg': 'Hello',
-                'name': 'Chandan'
-            };
-            var data = {
-                "browser": "",
-                "ip": "",
-                "location": "",
-                "OS": "",
-                "device": "",
-                "startTime": "",
-                "endTime": ""
-            };
+        <header>
+            <nav>
+                <ul id="nav_bar">
+                    <li class="nav-links" id="gmail">
+                        <a href="#">About this project</a>
+                    </li>
+                    <li class="nav-links">
+                        <a href="#">Analytics (coming soon)</a>
+                    </li>
+                </ul>
+            </nav>
+            <h1>URL Shortening</h1>
+</h1></header>
+<!-- FORM SEARCH -->
+<div class="form">
+    <form>
+        <label for="form-search"></label>
+        <br>
+        <input class="input_style" type="text" id="inputBox" placeholder="Enter long link here"></input>
+    </form>
+</div>
+<!-- BUTTONS -->
+<div class="buttons">
+    <button class="button_style" type="submit" onclick="handleEnterClick()">Shorten the Link</button>
+</div>
+<!-- LABEL-->
+<div class="container">
+    <label id="outputLabel" class="text"></label>
+</div>
+<!--DATA HANDLING -->
+<script>
+    var state = {
+        'msg': 'Hello',
+        'name': 'Chandan'
+    };
+    var data = {
+        "browser": "",
+        "ip": "",
+        "location": "",
+        "OS": "",
+        "device": "",
+        "startTime": "",
+        "endTime": ""
+    };
 
-            function handleEnterClick() {
-                var inputBox = document.getElementById("inputBox");
-                var outputLabel = document.getElementById("outputLabel");
-                var inputValue = inputBox.value;
+    function handleEnterClick() {
+        var inputBox = document.getElementById("inputBox");
+        var outputLabel = document.getElementById("outputLabel");
+        var inputValue = inputBox.value;
 
-                // Check if input is a valid link
+        // Check if input is a valid link
 
-                if (state.hasOwnProperty(inputValue)) {
-                    outputLabel.innerText = state[inputValue];
-                } else {
+        if (state.hasOwnProperty(inputValue)) {
+            outputLabel.innerText = state[inputValue];
+        } else {
 
-                    // Make a call to your Flask backend
-                    fetch('/process', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            input: inputValue
-                        })
-                    }).then(response=>response.json()).then(data=>{
-                        outputLabel.innerText = data.output;
-                    }
-                    ).catch(error=>{
-                        console.error('Error:', error);
-                    }
-                    );
-
-                    inputBox.value = "";
-                }
+            // Make a call to your Flask backend
+            fetch('/process', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    input: inputValue
+                })
+            }).then(response=>response.json()).then(data=>{
+                outputLabel.innerText = data.output;
             }
-
-            function onLoad() {
-
-                //get users browser, ip, location, OS, and device and store in JSON
-                // get users browser
-                fetch('https://api.ipify.org?format=json').then(response=>response.json()).then(data=>{
-                    updateData('ip', data.ip);
-                }
-                ).catch(error=>{
-                    console.error('Error:', error);
-                }
-                );
-
-                //get users location
-                fetch('https://ipapi.co/json/').then(response=>response.json()).then(data=>{
-                    updateData('location', data.city);
-                }
-                ).catch(error=>{
-                    console.error('Error:', error);
-                }
-                )
-
-                //get users OS
-                updateData('OS', navigator.platform);
-
-                //get users device
-                updateData('device', navigator.userAgent);
-
-                //get start time
-                updateData('startTime', new Date());
-
-                console.log(data);
-            };
-
-            function updateData(field, value) {
-                if (data.hasOwnProperty(field)) {
-                    data[field] = value;
-                }
+            ).catch(error=>{
+                console.error('Error:', error);
             }
-        </script>
-    </body>
-</html>
+            );
+
+            inputBox.value = "";
+        }
+    }
+
+    function onLoad() {
+
+        //get users browser, ip, location, OS, and device and store in JSON
+        // get users browser
+        fetch('https://api.ipify.org?format=json').then(response=>response.json()).then(data=>{
+            updateData('ip', data.ip);
+        }
+        ).catch(error=>{
+            console.error('Error:', error);
+        }
+        );
+
+        //get users location
+        fetch('https://ipapi.co/json/').then(response=>response.json()).then(data=>{
+            updateData('location', data.city);
+        }
+        ).catch(error=>{
+            console.error('Error:', error);
+        }
+        )
+
+        //get users OS
+        updateData('OS', navigator.platform);
+
+        //get users device
+        updateData('device', navigator.userAgent);
+
+        //get start time
+        updateData('startTime', new Date());
+
+        console.log(data);
+    }
+    ;function updateData(field, value) {
+        if (data.hasOwnProperty(field)) {
+            data[field] = value;
+        }
+    }
+</script>
+</body></html>
