@@ -7,6 +7,7 @@ body {
 
 header {
     width: 100%;
+    background: #4887ef;
 }
 
 ul {
@@ -76,6 +77,15 @@ ul {
     padding: 7px 15px;
     border-radius: 3px;
     font-weight: bold;
+}
+
+.nav-title{
+    float: left;
+    color:aquamarine;
+}
+
+.nav-myClass{
+    background: #4887ef;
 }
 
 .nav-links {
@@ -151,6 +161,11 @@ footer ul a:hover {
 
 .footer-right {
     float: right;
+}
+
+img.center {
+    display: block;
+    margin: 0 auto;
 }
 
 /* MEDIA QUERIES */

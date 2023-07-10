@@ -3,12 +3,12 @@
     <head>
         <title>URL Shortener</title>
         <link rel="icon" type="image/png" href="../images/favicon.png">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheet.css') }}">
+        <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     </head>
     <body onload="onLoad()">
         <header>
-            <nav>
+            <nav class="nav-myClass">
                 <ul id="nav_bar">
                     <li class="nav-links" id="gmail">
                         <p>Contributors:</p>
@@ -24,14 +24,29 @@
                     </li>
                 </ul>
             </nav>
-            <h1>URL Shortening</h1> <img src="../images/logo.png" alt="Small URL Text in blue with angular logo to the left">
         </header>
 <!-- FORM SEARCH -->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <div class="form">
+    
     <form>
+        <img class = "center" src="../images/logo.png" alt="Small URL Text in blue with angular logo to the left">
+
         <label for="form-search"></label>
         <br>
-        <input class="input_style" type="text" id="inputBox" placeholder="Enter long link here"></input>
+        <input class="input_style" type="text" id="inputBox" placeholder="Enter long link here..."></input>
     </form>
 </div>
 <!-- BUTTONS -->
