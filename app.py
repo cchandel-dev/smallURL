@@ -22,7 +22,7 @@ except Exception as e:
 db = client['tinyURL-experimental'] #Select the database
 cl = db['test'] #Select the collection name
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path = '/static')
 
 @app.route('/')
 def index():
