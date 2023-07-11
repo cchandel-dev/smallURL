@@ -8,6 +8,7 @@
     </head>
     <body onload="onLoad()">
         <header>
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
             <nav class="nav-myClass">
                 <ul id="nav_bar">
                     <li class="nav-links" id="gmail">
@@ -51,13 +52,13 @@
 </div>
 <!-- BUTTONS -->
 <div class="buttons">
-    <button class="button_style" type="submit" onclick="handleEnterClick()">Shorten the Link</button>
+    <button id="masterbutton" class="button_style" type="submit" onclick="handleEnterClick()">Shorten the Link</button>
 </div>
 <!-- LABEL-->
-<div class="container">
+<!--<div class="container">
     <label id="outputLabel" class="text"></label>
 </div>
-    <button type=button onclick="copyToClipboard()">Copy to Clipboard</button>
+    <button type=button onclick="copyToClipboard()">Copy to Clipboard</button>-->
 <!--DATA HANDLING -->
 <script>
     function copyToClipboard() {
@@ -92,6 +93,7 @@
     function handleEnterClick() {
         var inputBox = document.getElementById("inputBox");
         var outputLabel = document.getElementById("outputLabel");
+        var myButton = document.getElementById("masterbutton");
         var inputValue = inputBox.value;
 
         // Check if input is a valid link
@@ -110,14 +112,16 @@
                     input: inputValue
                 })
             }).then(response=>response.json()).then(data=>{
-                outputLabel.innerText = data.output;
+                inputBox.value = data.output;
             }
             ).catch(error=>{
                 console.error('Error:', error);
             }
             );
 
-            inputBox.value = "";
+            //inputBox.value = "";
+
+            myButton.onclick = "copyToClipboard()";
         }
     }
 
