@@ -62,7 +62,7 @@
 <!--DATA HANDLING -->
 <script>
     function copyToClipboard() {
-        let val = document.getElementById("inputBox").value;
+        let val = document.getElementById("inputBox");
         /*const selBox = document.createElement('textarea');
         selBox.style.position = 'fixed';
         selBox.style.left = '0';
@@ -72,6 +72,7 @@
         document.body.appendChild(selBox);
         selBox.focus();
         selBox.select();*/
+        val.select();
         document.execCommand('copy');
         //document.body.removeChild(selBox);
         alert('text copied to clipboard');
