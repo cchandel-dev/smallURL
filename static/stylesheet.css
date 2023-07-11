@@ -167,8 +167,8 @@ img.center {
     display: block;
     margin: 0 auto;
     position: absolute;
-    top: 25%;
-    left: 37.5%;
+    top: 13vw;
+    left: 37.5vw;
 }
 
 /* MEDIA QUERIES */
