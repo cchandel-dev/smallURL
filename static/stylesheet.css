@@ -166,6 +166,9 @@ footer ul a:hover {
 img.center {
     display: block;
     margin: 0 auto;
+    position: absolute;
+    top: 25%;
+    left: 37.5%;
 }
 
 /* MEDIA QUERIES */
