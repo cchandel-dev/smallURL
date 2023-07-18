@@ -17,11 +17,11 @@ ul {
 .input_style {
     display: inline-block;
     *display: inline;
-    position: absolute;
+    /*position: absolute;
     top: 23vw;
     left: 50vw;
     margin-left: -120px;
-    margin-top: -100px;
+    margin-top: -100px;*/
     width: 350px;
     height: 30px;
 }
@@ -29,9 +29,9 @@ ul {
 .button_style {
     display: inline-block;
     *display: inline;
-    position: absolute;
+    /*position: absolute;
     top: 24vw;
-    left: 50vw;
+    left: 50vw;*/
     margin-left: 0px;
     margin-top: -60px;
     /*width: 120px;
@@ -111,6 +111,11 @@ li.nav-links a:hover {
 
 .form {
     text-align: center;
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    /*margin-left: 120px;
+    margin-top: -100px;*/
 }
 
 #form-search {
