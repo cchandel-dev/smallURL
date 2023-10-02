@@ -7,8 +7,8 @@ import hashlib
 import base64
 
 
-#MongoDB user permissions chaged to modify all databases
-uri = "mongodb+srv://Brain3DVizMember:9GyKqp4b9blclzqJ@tinyurl-experimental.cuym0r0.mongodb.net/?retryWrites=true&w=majority"
+#MongoDB user permissions chaged to modify all databases NmwJ5IYmUHDmaQNa  9GyKqp4b9blclzqJ
+uri = "mongodb+srv://Brain3DVizMember:NmwJ5IYmUHDmaQNa@tinyurl-experimental.cuym0r0.mongodb.net/?retryWrites=true&w=majority"
 counter = 0
 # Create a new client and connect to the server
 client = MongoClient(uri, server_api=ServerApi('1'))
